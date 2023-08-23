@@ -4,17 +4,20 @@ pipeline {
     stages {
         stage('Clonar o Repositório') {
             steps {
-                git branch: 'main', url: 'https://github.com/nsRodrigo/teste-cypress-ebac'
+                git branch: 'main', url: 'https://github.com/nsRodrigo/teste-api-cypress'
             }
         }
         stage('Instalar das dependencias') {
             steps {
                 bat 'npm install'
+                bat 'npm install cypress'
+                bat 'npm install start-server-and-test'
             }
         }
         stage('Execução dos testes') {
             steps {
-                bat 'npm run cy:run'
+                bat 'npm run ci'
+                bat 'npm run cy:report'
             }
         }
     }
