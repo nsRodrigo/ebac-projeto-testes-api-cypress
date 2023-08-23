@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Execução dos testes') {
             steps {
-                bat 'npm run ci'
+                bat 'npx start-test http://localhost:3000'
                 bat 'npm run cy:report'
             }
         }
