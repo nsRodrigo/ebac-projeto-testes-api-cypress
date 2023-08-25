@@ -11,12 +11,12 @@ pipeline {
             steps {
                 bat 'npm install'
                 bat 'npm install cypress'
-                bat 'npm install start-server-and-test'
+                bat 'npm install concurrently'
             }
         }
         stage('Execução dos testes') {
             steps {
-                bat 'npm run ci'
+                bat 'npm run test'
                 bat 'npm run cy:report'
             }
         }

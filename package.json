@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "npx serverest",
-    "test": "npx cypress run",
-    "ci": "start-server-and-test start http://localhost:3000 test",
+    "cy:run": "npx cypress run",
+    "test": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && npm run cy:run\" --kill-others --success first",
     "cy:report": "npx mochawesome-merge .\\mochawesome-report\\mochawesome*.json > mochawesome-report\\report.json && npx marge mochawesome-report\\report.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.2.1",
     "cypress": "^12.17.3",
     "cypress-multi-reporters": "^1.6.3",
     "cypress-plugin-api": "^2.11.1",
