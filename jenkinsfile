@@ -2,21 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Clonar o Repositório') {
+        stage('Clonar repositório') {
             steps {
                 git branch: 'main', url: 'https://github.com/nsRodrigo/teste-api-cypress'
             }
         }
-        stage('Instalar das dependencias') {
+
+        stage('Instalar dependências') {
             steps {
-                bat 'npm install'
-                bat 'npm install cypress'
-                bat 'npm install concurrently'
+                bat 'npm install --prefix .'
             }
         }
-        stage('Execução dos testes') {
+
+       stage('Executar serverest') {
             steps {
-                bat 'npm run test'
+                bat 'start /B cmd /C "npm start --prefix ."'
+            }
+        }
+
+        stage('Executar testes') {
+            steps {
+                bat 'npm run cy:run --prefix .'
             }
         }
     }
